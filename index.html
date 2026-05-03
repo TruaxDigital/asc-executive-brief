@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASC Executive Strategic Brief — May 3, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --asc-dark: #221C35;
+    --asc-dark-2: #2C2540;
+    --asc-regal: #5A2D8A;
+    --asc-bright: #AC4FC6;
+    --asc-bright-soft: #D9B8E5;
+    --asc-tint: #F5F1F8;
+    --asc-line: #E8E3EE;
+    --asc-text: #221C35;
+    --asc-muted: #6B6479;
+    --asc-white: #FFFFFF;
+    --asc-success: #1F8A56;
+    --asc-warn: #C2570A;
+    --asc-danger: #B22638;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --nav-h: 64px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 12px); }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--asc-text);
+    background: #ECE7F1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.55;
+  }
+
+  /* ============== Sticky navigation ============== */
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--nav-h);
+    background: rgba(34, 28, 53, 0.92);
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: white;
+  }
+  .topnav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .topnav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .topnav-brand svg { width: 56px; height: auto; }
+  .topnav-brand .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--asc-bright);
+    font-weight: 700;
+    line-height: 1;
+    border-left: 1px solid rgba(255,255,255,0.18);
+    padding-left: 12px;
+    white-space: nowrap;
+  }
+  .topnav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .topnav-links::-webkit-scrollbar { display: none; }
+  .topnav-link {
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .topnav-link:hover { color: white; background: rgba(255,255,255,0.08); }
+  .topnav-link.active {
+    color: white;
+    background: var(--asc-regal);
+  }
+  .topnav-cta {
+    flex-shrink: 0;
+    background: var(--asc-bright);
+    color: var(--asc-dark);
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 9px 14px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+    font-family: inherit;
+  }
+  .topnav-cta:hover { background: #C26ED9; transform: translateY(-1px); }
+
+  /* ============== Reading progress bar ============== */
+  .progress {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--asc-bright), var(--asc-regal));
+    width: 0%;
+    transition: width 80ms linear;
+  }
+
+  /* ============== Document shell ============== */
+  .doc {
+    max-width: 1080px;
+    margin: 0 auto;
+    background: var(--asc-white);
+    box-shadow: 0 30px 80px rgba(34, 28, 53, 0.18);
+  }
+  .page {
+    padding: 64px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ============== Cover ============== */
+  .cover {
+    min-height: 880px;
+    padding: 72px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--asc-dark);
+    color: var(--asc-white);
+    position: relative;
+    overflow: hidden;
+  }
+  .wave-bg {
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 0;
+  }
+  .wave-bg svg { width: 100%; height: 100%; display: block; }
+  .cover > * { position: relative; z-index: 1; }
+  .cover-logo { width: 130px; }
+  .cover-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--asc-bright);
+    margin-bottom: 24px;
+  }
+  .cover-title {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 22px;
+  }
+  .cover-subtitle {
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.78);
+    max-width: 720px;
+    margin: 0;
+  }
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    padding-top: 28px;
+  }
+  .meta-label {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--asc-bright);
+    margin-bottom: 6px;
+  }
+  .meta-value { font-size: 15px; font-weight: 500; color: white; }
+
+  /* ============== Section divider ============== */
+  .divider {
+    background: var(--asc-regal);
+    color: white;
+    padding: 60px 80px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .divider .number {
+    font-size: 48px; font-weight: 800;
+    color: var(--asc-bright-soft); line-height: 1;
+    margin-bottom: 12px;
+  }
+  .divider .title {
+    font-size: 48px; font-weight: 800;
+    line-height: 1.05; letter-spacing: -0.015em; margin: 0;
+  }
+  .divider .lead {
+    margin-top: 18px; font-size: 17px; font-weight: 500;
+    color: rgba(255,255,255,0.85); max-width: 720px; line-height: 1.5;
+  }
+
+  /* ============== Typography ============== */
+  h1.section { font-size: 36px; font-weight: 800; line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.015em; color: var(--asc-dark); }
+  h2.subsection { font-size: 23px; font-weight: 700; margin: 32px 0 12px; color: var(--asc-dark); line-height: 1.25; }
+  .eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; font-weight: 700; color: var(--asc-bright); margin-bottom: 10px; }
+  .lead-p { font-size: 18px; font-weight: 500; color: var(--asc-dark); line-height: 1.5; margin: 0 0 24px; }
+  p { font-size: 15.5px; line-height: 1.65; margin: 0 0 16px; color: #2A2440; }
+  strong { font-weight: 600; color: var(--asc-dark); }
+
+  .pullquote {
+    border-left: 4px solid var(--asc-bright);
+    background: var(--asc-tint);
+    padding: 22px 26px;
+    margin: 26px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 17px; font-weight: 500;
+    color: var(--asc-dark); line-height: 1.55;
+  }
+
+  /* ============== KPI ============== */
+  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 26px 0 8px; }
+  .kpi {
+    background: var(--asc-dark); color: white;
+    padding: 24px; border-radius: var(--radius);
+  }
+  .kpi .label {
+    text-transform: uppercase; letter-spacing: 0.12em;
+    font-size: 11px; font-weight: 600;
+    color: var(--asc-bright); margin-bottom: 10px;
+  }
+  .kpi .value { font-size: 30px; font-weight: 800; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .kpi .desc { font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.45; }
+
+  /* ============== Trust bar ============== */
+  .trust-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 22px 0 10px; }
+  .trust-pill {
+    background: var(--asc-tint);
+    border: 1px solid var(--asc-line);
+    border-radius: var(--radius-sm);
+    padding: 18px; text-align: center;
+  }
+  .trust-pill .num {
+    width: 32px; height: 32px;
+    background: var(--asc-regal); color: white;
+    border-radius: 50%; display: inline-flex;
+    align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; margin-bottom: 10px;
+  }
+  .trust-pill .label { font-size: 13px; font-weight: 600; color: var(--asc-dark); line-height: 1.35; }
+
+  /* ============== SWOT ============== */
+  .swot { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; }
+  .swot-cell { border-radius: var(--radius); padding: 24px; border: 1px solid var(--asc-line); }
+  .swot-cell .head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .swot-cell .pill {
+    text-transform: uppercase; letter-spacing: 0.12em;
+    font-size: 10px; font-weight: 700;
+    padding: 4px 10px; border-radius: 999px;
+  }
+  .swot-cell h4 { font-size: 17px; font-weight: 700; margin: 0; color: var(--asc-dark); }
+  .swot-cell ol { padding-left: 20px; margin: 0; }
+  .swot-cell li { font-size: 14px; line-height: 1.55; margin-bottom: 9px; color: #2A2440; }
+  .swot-s { background: #F1ECF7; border-color: #D9C8EA; }
+  .swot-s .pill { background: var(--asc-regal); color: white; }
+  .swot-w { background: #FCF6F8; border-color: #EAD0D6; }
+  .swot-w .pill { background: var(--asc-danger); color: white; }
+  .swot-o { background: #EEF8F2; border-color: #C8E6D3; }
+  .swot-o .pill { background: var(--asc-success); color: white; }
+  .swot-t { background: #FBF3E9; border-color: #E9D2B0; }
+  .swot-t .pill { background: var(--asc-warn); color: white; }
+
+  /* ============== Moves ============== */
+  .moves { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+  .move {
+    background: var(--asc-tint); border: 1px solid var(--asc-line);
+    border-radius: var(--radius-sm); padding: 20px;
+  }
+  .move .tag {
+    display: inline-block; background: var(--asc-dark); color: white;
+    font-size: 10.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 10px; border-radius: 999px; margin-bottom: 10px;
+  }
+  .move h4 { font-size: 15px; font-weight: 700; margin: 0 0 8px; color: var(--asc-dark); }
+  .move p { font-size: 13.5px; margin: 0; line-height: 1.55; color: #2A2440; }
+
+  /* ============== Forces ============== */
+  .forces { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 22px; }
+  .force {
+    display: grid; grid-template-columns: 220px 1fr; gap: 24px;
+    padding: 22px; border: 1px solid var(--asc-line);
+    border-radius: var(--radius); background: white; align-items: start;
+  }
+  .force .label {
+    background: var(--asc-dark); color: white;
+    border-radius: var(--radius-sm); padding: 14px;
+  }
+  .force .label .name { font-size: 14px; font-weight: 600; line-height: 1.3; margin-bottom: 8px; }
+  .force .label .level {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 10px; border-radius: 999px;
+    background: var(--asc-bright); color: var(--asc-dark);
+  }
+  .force .body p { margin: 0; font-size: 14.5px; line-height: 1.6; }
+
+  /* ============== Priorities ============== */
+  .priorities { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 20px; }
+  .priority {
+    border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--asc-line); background: white;
+  }
+  .priority-head {
+    background: var(--asc-dark); color: white;
+    padding: 22px 26px; display: flex; align-items: center; gap: 18px;
+  }
+  .priority-num {
+    width: 44px; height: 44px;
+    background: var(--asc-bright); color: var(--asc-dark);
+    border-radius: 50%; display: flex;
+    align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px; flex-shrink: 0;
+  }
+  .priority-head h3 { margin: 0; font-size: 19px; font-weight: 700; line-height: 1.3; }
+  .priority-body { padding: 22px 26px; }
+  .priority-body p { font-size: 14.5px; }
+  .priority-metric {
+    margin-top: 14px; padding: 14px 16px;
+    background: var(--asc-tint);
+    border-left: 3px solid var(--asc-bright);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 13.5px; color: var(--asc-dark);
+  }
+  .priority-metric strong {
+    display: block; text-transform: uppercase; letter-spacing: 0.1em;
+    font-size: 11px; font-weight: 700;
+    color: var(--asc-regal); margin-bottom: 4px;
+  }
+
+  /* ============== Tables ============== */
+  table.brief {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    margin-top: 16px; border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--asc-line);
+  }
+  table.brief thead th {
+    background: var(--asc-dark); color: white; text-align: left;
+    padding: 14px 18px; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  table.brief tbody td {
+    padding: 16px 18px; font-size: 14px; line-height: 1.55;
+    border-top: 1px solid var(--asc-line); vertical-align: top;
+  }
+  table.brief tbody tr:nth-child(even) td { background: #FAFAFC; }
+  table.brief tbody td:first-child { font-weight: 600; color: var(--asc-dark); width: 42%; }
+
+  /* ============== Risks ============== */
+  .risks { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 18px; }
+  .risk {
+    border: 1px solid var(--asc-line);
+    border-left: 4px solid var(--asc-bright);
+    border-radius: var(--radius-sm);
+    padding: 20px 22px; background: white;
+  }
+  .risk h4 { font-size: 16px; font-weight: 700; margin: 0 0 8px; color: var(--asc-dark); }
+  .risk p { font-size: 14px; margin: 0; line-height: 1.6; }
+  .risk .mit {
+    display: inline-block; margin-top: 10px;
+    font-size: 12.5px; font-weight: 600;
+    color: var(--asc-regal); text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* ============== Closing ============== */
+  .closing {
+    background: var(--asc-dark); color: white;
+    padding: 72px 80px; position: relative; overflow: hidden;
+  }
+  .closing > * { position: relative; z-index: 1; }
+  .closing h2 { font-size: 42px; font-weight: 800; line-height: 1.1; margin: 0 0 20px; letter-spacing: -0.015em; }
+  .closing p { font-size: 16.5px; color: rgba(255,255,255,0.85); line-height: 1.65; max-width: 720px; }
+  .footer-grid {
+    margin-top: 36px; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 40px;
+    border-top: 1px solid rgba(255,255,255,0.15); padding-top: 28px;
+  }
+  .footer-grid .lbl {
+    text-transform: uppercase; letter-spacing: 0.15em;
+    font-size: 11px; font-weight: 700;
+    color: var(--asc-bright); margin-bottom: 6px;
+  }
+  .footer-grid .val { font-size: 15px; color: white; font-weight: 500; }
+
+  /* ============== Back to top ============== */
+  .back-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 44px; height: 44px;
+    background: var(--asc-regal);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(34,28,53,0.35);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    z-index: 90;
+  }
+  .back-top.show { opacity: 1; pointer-events: auto; }
+  .back-top:hover { background: var(--asc-bright); transform: translateY(-2px); }
+  .back-top svg { width: 18px; height: 18px; }
+
+  /* ============== Mobile ============== */
+  @media (max-width: 880px) {
+    .topnav-inner { padding: 0 14px; gap: 10px; }
+    .topnav-brand .label { display: none; }
+    .topnav-cta { display: none; }
+    .topnav-link { font-size: 12.5px; padding: 7px 10px; }
+    .page, .closing { padding: 40px 24px; }
+    .cover { padding: 48px 24px; min-height: 0; }
+    .divider { padding: 40px 24px; min-height: 0; }
+    .cover-title { font-size: 44px; }
+    .divider .title { font-size: 34px; }
+    .closing h2 { font-size: 30px; }
+    .cover-meta, .swot, .moves, .kpi-row, .trust-bar, .footer-grid { grid-template-columns: 1fr; }
+    .force { grid-template-columns: 1fr; }
+    h1.section { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     STICKY NAVIGATION
+============================================================ -->
+<nav class="topnav" id="topnav" aria-label="Section navigation">
+  <div class="topnav-inner">
+    <a href="#cover" class="topnav-brand">
+      <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" aria-label="ASC">
+        <path fill="#FFFFFF" fill-rule="evenodd" clip-rule="evenodd" d="M68,67c6.2,1.9,11.4,3.1,16.3,3.1l0,19.8c-7.9,0-15.5-1.9-22-3.9c-2.3-0.7-4.5-1.4-6.5-2.1c-4.2-1.4-8-2.6-12-3.5c-5.7-1.3-10.5-1.7-15-0.7c-4.4,0.9-9.2,3.3-14.7,8.7l-14-14c7.8-7.8,16-12.2,24.6-14.1c8.4-1.8,16.4-0.8,23.6,0.8c4.9,1.1,10,2.8,14.5,4.2C64.6,65.9,66.3,66.5,68,67z"/>
+        <path fill="#FFFFFF" fill-rule="evenodd" clip-rule="evenodd" d="M46.1,80.3L72.4,1.7h30.5l38.4,114.9h-24.2l-8.5-26.7H83c-6.7-0.4-13.3-2.4-19-4.1c-0.4-0.1-0.8-0.2-1.1-0.3c-2.3-0.7-4.5-1.4-6.5-2.1C52.8,82.2,49.5,81.2,46.1,80.3z M72.7,69.7h29.6l-9.6-30.3l-5-18.7l-5.2,18.7L72.7,69.7z"/>
+        <path fill="#FFFFFF" d="M39.1,101.3L34,116.6h23.8l7-21.9c-5.3-0.9-9.8-1-14,0C47.2,95.6,43.3,97.4,39.1,101.3z"/>
+        <path fill="#FFFFFF" d="M166.3,117.1c-6.3,0-12-0.9-17-2.6c-5-1.8-9.1-4.2-12.3-7.3c-3.2-3.1-5.7-6.8-7.4-10.9c-1.7-4.1-2.6-8.6-2.8-13.4h22.6c0.9,9.4,7.2,14,18.8,14c5.9,0,10.6-1.2,14.1-3.5c3.6-2.4,5.3-5.5,5.3-9.3c0-1.6-0.4-3-1.1-4.3c-0.7-1.3-1.5-2.4-2.6-3.2c-1-0.9-2.6-1.7-4.8-2.6c-2.2-0.9-4.2-1.6-6-2.2c-1.9-0.6-4.5-1.4-7.9-2.3c-4.7-1.3-8.6-2.5-11.7-3.5c-3.1-1.1-6.4-2.6-9.8-4.4c-3.3-1.9-6-3.9-8-6c-2-2.2-3.6-5-4.9-8.3c-1.3-3.3-1.9-7.1-1.9-11.3c0-7.3,1.8-13.6,5.3-18.9c3.6-5.4,8.4-9.4,14.5-12.1c6.2-2.7,13.2-4.1,21.1-4.1c11.6,0,20.9,2.9,27.9,8.8c7,5.8,10.7,13.8,11.2,23.9h-22.6c-0.6-4.1-2.4-7.2-5.5-9.3c-3-2.2-7.1-3.2-12.2-3.2c-4.9,0-9,1-12.2,3.1c-3.1,2.1-4.7,4.9-4.7,8.6c0,1.7,0.3,3.2,1,4.6c0.7,1.3,1.5,2.5,2.6,3.4c1.1,0.9,2.6,1.7,4.4,2.5c1.9,0.8,3.7,1.5,5.6,2.2c1.9,0.6,4.2,1.3,6.9,2.1c0.6,0.2,1.1,0.3,1.4,0.4c3.3,1,6.1,1.9,8.3,2.6c2.3,0.7,4.8,1.7,7.6,2.9c2.8,1.1,5.1,2.3,6.9,3.4c1.9,1.1,3.8,2.5,5.7,4.2c2,1.7,3.5,3.5,4.6,5.4c1.1,1.9,2,4.1,2.7,6.7c0.7,2.6,1.1,5.4,1.1,8.4c0,7.5-2,13.9-5.9,19.4c-3.9,5.5-9.2,9.5-15.7,12.2C182.3,115.8,174.8,117.1,166.3,117.1z"/>
+        <path fill="#FFFFFF" d="M230.7,113.6c6.7,2.9,14.3,4.4,22.7,4.4c13.3,0,24-3.6,31.9-10.7c8-7.2,12.7-16.6,13.9-28.3h-23.1c-0.7,5.1-3.1,9.5-7.1,13c-4,3.4-9.2,5.2-15.7,5.2c-8.5,0-15.5-3.2-21-9.6c-5.5-6.6-8.3-15.5-8.3-26.7v-3.6c0-11.2,2.8-20.1,8.3-26.7c5.2-6.4,12-9.6,20.4-9.6c6.2,0,11.4,1.7,15.5,5.2c4.1,3.4,6.6,7.7,7.6,13H299c-1.2-11.7-5.9-21.1-13.9-28.2C277,3.6,266.3,0,253,0c-16.5,0-29.5,5.7-39.2,17.2c-8.4,10.3-12.7,23.5-12.7,39.7v4.2c0,16.4,4.2,29.6,12.7,39.8C218.3,106.4,224,110.6,230.7,113.6z"/>
+      </svg>
+      <span class="label">Strategic Brief</span>
+    </a>
+
+    <div class="topnav-links" id="topnav-links">
+      <a class="topnav-link" href="#summary" data-section="summary">Summary</a>
+      <a class="topnav-link" href="#market" data-section="market">Market</a>
+      <a class="topnav-link" href="#swot" data-section="swot">SWOT</a>
+      <a class="topnav-link" href="#forces" data-section="forces">Forces</a>
+      <a class="topnav-link" href="#recommendations" data-section="recommendations">Recommendations</a>
+      <a class="topnav-link" href="#watchlist" data-section="watchlist">Watch List</a>
+      <a class="topnav-link" href="#risks" data-section="risks">Risks</a>
+      <a class="topnav-link" href="#conclusion" data-section="conclusion">Conclusion</a>
+    </div>
+
+    <button class="topnav-cta" onclick="window.print()" title="Print or save as PDF">Print / PDF</button>
+  </div>
+  <div class="progress" id="progress"></div>
+</nav>
+
+<div class="doc">
+
+<!-- ============================================================
+     COVER
+============================================================ -->
+<section class="cover" id="cover">
+  <div class="wave-bg" aria-hidden="true">
+    <svg viewBox="0 0 1080 880" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#5A2D8A" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#AC4FC6" stop-opacity="0.05"/>
+        </linearGradient>
+        <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#AC4FC6" stop-opacity="0.30"/>
+          <stop offset="100%" stop-color="#5A2D8A" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path d="M-50,580 C 220,500 460,720 760,600 C 980,520 1080,600 1180,580 L 1180,880 L -50,880 Z" fill="url(#g1)"/>
+      <path d="M-50,680 C 240,600 520,780 820,660 C 1000,600 1100,660 1180,650 L 1180,880 L -50,880 Z" fill="url(#g2)"/>
+      <path d="M-50,760 C 260,700 540,830 880,750 C 1040,710 1100,760 1180,750 L 1180,880 L -50,880 Z" fill="#5A2D8A" opacity="0.55"/>
+    </svg>
+  </div>
+
+  <div>
+    <svg class="cover-logo" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" aria-label="ASC">
+      <path fill="#FFFFFF" fill-rule="evenodd" clip-rule="evenodd" d="M68,67c6.2,1.9,11.4,3.1,16.3,3.1l0,19.8c-7.9,0-15.5-1.9-22-3.9c-2.3-0.7-4.5-1.4-6.5-2.1c-4.2-1.4-8-2.6-12-3.5c-5.7-1.3-10.5-1.7-15-0.7c-4.4,0.9-9.2,3.3-14.7,8.7l-14-14c7.8-7.8,16-12.2,24.6-14.1c8.4-1.8,16.4-0.8,23.6,0.8c4.9,1.1,10,2.8,14.5,4.2C64.6,65.9,66.3,66.5,68,67z"/>
+      <path fill="#FFFFFF" fill-rule="evenodd" clip-rule="evenodd" d="M46.1,80.3L72.4,1.7h30.5l38.4,114.9h-24.2l-8.5-26.7H83c-6.7-0.4-13.3-2.4-19-4.1c-0.4-0.1-0.8-0.2-1.1-0.3c-2.3-0.7-4.5-1.4-6.5-2.1C52.8,82.2,49.5,81.2,46.1,80.3z M72.7,69.7h29.6l-9.6-30.3l-5-18.7l-5.2,18.7L72.7,69.7z"/>
+      <path fill="#FFFFFF" d="M39.1,101.3L34,116.6h23.8l7-21.9c-5.3-0.9-9.8-1-14,0C47.2,95.6,43.3,97.4,39.1,101.3z"/>
+      <path fill="#FFFFFF" d="M166.3,117.1c-6.3,0-12-0.9-17-2.6c-5-1.8-9.1-4.2-12.3-7.3c-3.2-3.1-5.7-6.8-7.4-10.9c-1.7-4.1-2.6-8.6-2.8-13.4h22.6c0.9,9.4,7.2,14,18.8,14c5.9,0,10.6-1.2,14.1-3.5c3.6-2.4,5.3-5.5,5.3-9.3c0-1.6-0.4-3-1.1-4.3c-0.7-1.3-1.5-2.4-2.6-3.2c-1-0.9-2.6-1.7-4.8-2.6c-2.2-0.9-4.2-1.6-6-2.2c-1.9-0.6-4.5-1.4-7.9-2.3c-4.7-1.3-8.6-2.5-11.7-3.5c-3.1-1.1-6.4-2.6-9.8-4.4c-3.3-1.9-6-3.9-8-6c-2-2.2-3.6-5-4.9-8.3c-1.3-3.3-1.9-7.1-1.9-11.3c0-7.3,1.8-13.6,5.3-18.9c3.6-5.4,8.4-9.4,14.5-12.1c6.2-2.7,13.2-4.1,21.1-4.1c11.6,0,20.9,2.9,27.9,8.8c7,5.8,10.7,13.8,11.2,23.9h-22.6c-0.6-4.1-2.4-7.2-5.5-9.3c-3-2.2-7.1-3.2-12.2-3.2c-4.9,0-9,1-12.2,3.1c-3.1,2.1-4.7,4.9-4.7,8.6c0,1.7,0.3,3.2,1,4.6c0.7,1.3,1.5,2.5,2.6,3.4c1.1,0.9,2.6,1.7,4.4,2.5c1.9,0.8,3.7,1.5,5.6,2.2c1.9,0.6,4.2,1.3,6.9,2.1c0.6,0.2,1.1,0.3,1.4,0.4c3.3,1,6.1,1.9,8.3,2.6c2.3,0.7,4.8,1.7,7.6,2.9c2.8,1.1,5.1,2.3,6.9,3.4c1.9,1.1,3.8,2.5,5.7,4.2c2,1.7,3.5,3.5,4.6,5.4c1.1,1.9,2,4.1,2.7,6.7c0.7,2.6,1.1,5.4,1.1,8.4c0,7.5-2,13.9-5.9,19.4c-3.9,5.5-9.2,9.5-15.7,12.2C182.3,115.8,174.8,117.1,166.3,117.1z"/>
+      <path fill="#FFFFFF" d="M230.7,113.6c6.7,2.9,14.3,4.4,22.7,4.4c13.3,0,24-3.6,31.9-10.7c8-7.2,12.7-16.6,13.9-28.3h-23.1c-0.7,5.1-3.1,9.5-7.1,13c-4,3.4-9.2,5.2-15.7,5.2c-8.5,0-15.5-3.2-21-9.6c-5.5-6.6-8.3-15.5-8.3-26.7v-3.6c0-11.2,2.8-20.1,8.3-26.7c5.2-6.4,12-9.6,20.4-9.6c6.2,0,11.4,1.7,15.5,5.2c4.1,3.4,6.6,7.7,7.6,13H299c-1.2-11.7-5.9-21.1-13.9-28.2C277,3.6,266.3,0,253,0c-16.5,0-29.5,5.7-39.2,17.2c-8.4,10.3-12.7,23.5-12.7,39.7v4.2c0,16.4,4.2,29.6,12.7,39.8C218.3,106.4,224,110.6,230.7,113.6z"/>
+    </svg>
+  </div>
+
+  <div>
+    <div class="cover-eyebrow">Executive Strategic Brief</div>
+    <h1 class="cover-title">Owning the<br>Privacy-First<br>Presence Lane.</h1>
+    <p class="cover-subtitle">Market positioning, competitive landscape, and 90-day strategic priorities ahead of the consumer-app launch.</p>
+  </div>
+
+  <div>
+    <div class="cover-meta">
+      <div><div class="meta-label">Prepared For</div><div class="meta-value">Applied Sensor Co Leadership</div></div>
+      <div><div class="meta-label">Prepared By</div><div class="meta-value">Truax Marketing Solutions</div></div>
+      <div><div class="meta-label">Date</div><div class="meta-value">May 3, 2026</div></div>
+      <div><div class="meta-label">Classification</div><div class="meta-value">Confidential — Board Review</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 1 — EXECUTIVE SUMMARY
+============================================================ -->
+<section class="divider" id="summary">
+  <div class="number">01</div>
+  <h2 class="title">Executive Summary</h2>
+  <p class="lead">An inflection point for ASC, the category, and the buyer.</p>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Section 01 / Executive Summary</div>
+  <h1 class="section">A clean opening in a category that is finally in motion.</h1>
+  <p class="lead-p">Applied Sensor Co sits at an inflection point. Smart-home presence and pressure sensing is shifting from a tinkerer-only Home Assistant niche into a mainstream consumer market driven by three converging buyer trends: subscription fatigue, privacy concern about Chinese-headquartered hardware, and growing demand from adult-child caregivers for a non-camera, non-microphone way to know an aging parent is safe at night.</p>
+
+  <p>The current category leaders each address an adjacent problem and miss the buyer's actual job-to-be-done. Aqara (mmWave, Chinese-made) sells multi-zone radar mapping plagued by ghosting. Withings sells clinical sleep stages where peer-reviewed accuracy is only 63%. Eight Sleep sells temperature regulation at $3,000 plus subscription, now under class-action lawsuit for false-discount practices. Sensi.AI sells AI audio analytics to home-care agencies, putting microphones into senior bedrooms. None of them sell what the customer is actually buying: a deterministic, dignified, owned-not-rented alert that reliably wakes a tired caregiver at 3am.</p>
+
+  <p>ASC is uniquely positioned to take this gap. Pressure sensing is the only deterministic alternative to interpretive radar in the category. ASC's "presence, not surveillance" frame, made-in-Woodinville origin, ESP32 open architecture, and zero-subscription model are precisely the four credentials the emerging buyer is filtering for. With the consumer app launching, the ceiling on the addressable market lifts from the Home Assistant community to mainstream eldercare and parental-monitoring buyers.</p>
+
+  <div class="pullquote">
+    The strategic question over the next 90 days is not whether ASC has a defensible position. It does. The question is whether ASC can ship three operational priorities fast enough to capture the buyer migration that is already in motion before larger competitors notice the lane.
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="label">Buyer Pricing Tolerance</div>
+      <div class="value">$120 – $190</div>
+      <div class="desc">Caregiver willingness to pay validated in AgingCare and Alzheimer's Society UK threads. No price resistance observed at this band.</div>
+    </div>
+    <div class="kpi">
+      <div class="label">NDAA Procurement Growth</div>
+      <div class="value">$3.4B → $6.9B</div>
+      <div class="desc">Non-Chinese sensor and surveillance market, 2024 to 2029. ASC specs already qualify.</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Withings Sleep Accuracy</div>
+      <div class="value">63%</div>
+      <div class="desc">Peer-reviewed sleep-stage accuracy of the closest premium clinical-sleep competitor. Not a category leader.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2 — MARKET CONTEXT
+============================================================ -->
+<section class="divider" id="market">
+  <div class="number">02</div>
+  <h2 class="title">Market Context &amp; the Strategic Question</h2>
+  <p class="lead">The category is bifurcating. Two distinct buyers. One needs a system; the other needs an alert.</p>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Section 02 / Market Context</div>
+  <h1 class="section">Two buyers, three trends, one window.</h1>
+
+  <h2 class="subsection">2.1 The category is bifurcating</h2>
+  <p>Until 2024, presence sensing for the home was a developer-tier product. The buyer was a Home Assistant user assembling a system. Distribution was Amazon and AliExpress. The conversation lived on r/homeassistant. The 2025 shift has been the entry of consumer-app brands (SwitchBot, Aqara via Apple Home, Eight Sleep) and the breakout of the eldercare buyer who will never run Home Assistant but is actively shopping for a bed-exit alert with a phone notification.</p>
+  <p>The category is now bifurcating into two distinct buyer segments. The first is the smart-home enthusiast who wants room-level automation and is comfortable with Home Assistant or HomeKit. The second is the caregiver buyer (adult child, spouse, parent of a wandering toddler) who wants one alert reliably delivered to a phone. The first segment is mature and competitive. The second segment is large, growing, and largely underserved.</p>
+
+  <h2 class="subsection">2.2 Three converging buyer trends</h2>
+  <p><strong>Subscription fatigue is now a filter, not a complaint.</strong> Reddit, XDA Developers, and the Eight Sleep class action coverage all converge on the same buyer mood: hardware that requires monthly fees is now read as a bait-and-switch signal. The XDA piece (citing local-only smart home as a privacy and cost win) frames the new bar bluntly: "Local control is the only way to escape the infinite upsell."</p>
+  <p><strong>Privacy concern about Chinese-headquartered smart home brands has moved from fringe to mainstream.</strong> The Foundation for Defense of Democracies, The Hill, and Bitdefender have all published on Chinese cellular modules and smart home data flows. Federal procurement teams are now actively NDAA-filtering hardware. The consumer-side equivalent is showing up in Reddit threads where buyers explicitly avoid Ring, Nest, and Aqara for data-jurisdiction reasons.</p>
+  <p><strong>The adult-child caregiver buyer has emerged as the highest-intent segment in the category.</strong> AgingCare and Alzheimer's Society UK threads show real-time evidence: caregivers actively shopping for pad-and-pager alerts, frustrated with camera noise, asking specifically for "no cameras, no wearables." This buyer is older, less price-sensitive, and emotionally driven by a single moment: a parent standing in their bedroom doorway at 1:20am.</p>
+
+  <h2 class="subsection">2.3 The strategic question</h2>
+  <p>The strategic question is not what business ASC is in. It is which buyer ASC chooses to win first, and how fast.</p>
+  <p>Two viable paths exist. <strong>Path A:</strong> optimize for the smart-home enthusiast (continue Home Assistant native, broaden ecosystem, position against Aqara). <strong>Path B:</strong> capture the caregiver buyer (lead with dignity messaging, ship a bundle, build the consumer app around critical alerts). Both paths use the same hardware. The difference is messaging, packaging, and the support model.</p>
+
+  <div class="pullquote">
+    The recommendation in this brief is Path B as the primary motion for the next 90 days, with Path A protected as a secondary channel. The caregiver segment is largest and least contested by privacy-first competitors, willingness to pay is higher, and ASC's brand attributes already match the buyer's filter: no camera, no microphone, made in USA, no subscription.
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3 — SWOT
+============================================================ -->
+<section class="divider" id="swot">
+  <div class="number">03</div>
+  <h2 class="title">SWOT Analysis</h2>
+  <p class="lead">A position assessment grounded in competitive intelligence and customer voice.</p>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Section 03 / SWOT Analysis</div>
+  <h1 class="section">ASC's current strategic position.</h1>
+  <p class="lead-p">The matrix below synthesizes the competitive intelligence and customer voice findings into ASC's current strategic position across four dimensions.</p>
+
+  <div class="swot">
+    <div class="swot-cell swot-s">
+      <div class="head"><span class="pill">Strengths</span><h4>Internal &middot; Helpful</h4></div>
+      <ol>
+        <li>Pressure sensing is deterministic. Cannot ghost on a fan, curtain, or pet, the highest-volume complaint in the category.</li>
+        <li>Made in Woodinville, WA. Direct counter-positioning to every Chinese-headquartered competitor at exactly the moment buyers are filtering for that.</li>
+        <li>ESP32 + open APIs (Home Assistant, MQTT, REST, ESPHome). A dual-track sales hook (consumer app and OEM) and a decade-resilient architecture.</li>
+        <li>No subscription. Pure hardware ownership at a moment when subscription fatigue is a category-wide signal of distrust.</li>
+        <li>Two complementary SKUs (SlumberTek + TrampleTek Blue) that natively bundle into a caregiver kit no privacy-first competitor offers.</li>
+      </ol>
+    </div>
+
+    <div class="swot-cell swot-w">
+      <div class="head"><span class="pill">Weaknesses</span><h4>Internal &middot; Harmful</h4></div>
+      <ol>
+        <li>Native consumer app is not yet shipping. Until launch, ASC cannot reach the mainstream caregiver buyer at all.</li>
+        <li>No public testimonial library, no "saved my life" stories. Babysense and Nanit own this layer in adjacent categories.</li>
+        <li>Brand awareness is near zero outside the Home Assistant community.</li>
+        <li>Single-channel DTC distribution. No Amazon, no Walmart, no senior-living B2B yet.</li>
+        <li>Limited customer-support scale. The "real human at support" promise is credible today but not yet built to defend at 50x order volume.</li>
+      </ol>
+    </div>
+
+    <div class="swot-cell swot-o">
+      <div class="head"><span class="pill">Opportunities</span><h4>External &middot; Helpful</h4></div>
+      <ol>
+        <li>Eight Sleep's March 2026 class-action lawsuit (Chopra v. Eight Sleep, N.D. Cal.) is creating peak-frustration moments for premium-sleep buyers who are now subscription-skeptical.</li>
+        <li>Walabot/Vayyar Care is pivoting to B2B nurse-call systems, opening DTC eldercare share.</li>
+        <li>Aqara FP2 ghosting remains unresolved despite the FP400 launch, leaving a "no false alerts" white space.</li>
+        <li>NDAA-driven, non-Chinese procurement growth in surveillance and sensor markets ($3.4B to $6.9B from 2024 to 2029, per Coram AI).</li>
+        <li>Adult-child caregiver demographic is structurally growing as the US population ages. Demand for "no camera, no microphone, no wearable" outpaces current supply.</li>
+      </ol>
+    </div>
+
+    <div class="swot-cell swot-t">
+      <div class="head"><span class="pill">Threats</span><h4>External &middot; Harmful</h4></div>
+      <ol>
+        <li>Aqara's FP400 (Matter-over-Thread, posture detection) could close the ghosting gap if reviewers validate. ASC's strongest weakness-attack would weaken.</li>
+        <li>SwitchBot Presence Sensor at ~$40 could pull the casual smart-home buyer out of the funnel before they find ASC.</li>
+        <li>Withings could re-enter the US with the Sleep Analyzer, reactivating clinical-sleep messaging that competes for SlumberTek mindshare.</li>
+        <li>A larger consumer-app brand (Wyze, Eufy, Apple Home expansion) could ship a privacy-first pressure-sensing product if the lane becomes visible.</li>
+        <li>App-launch execution risk. Critical-alert reliability, iOS DND bypass, and pairing UX must hit Babysense-class quality on day one.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2 class="subsection">3.1 Strategic moves derived from the matrix</h2>
+  <div class="moves">
+    <div class="move">
+      <span class="tag">SO &middot; Offensive</span>
+      <h4>Ride the privacy + made-in-USA wave</h4>
+      <p>Use ASC's privacy and US-made credentials to ride the Eight Sleep lawsuit news cycle and NDAA procurement growth. Build a four-point trust strip into every PDP and time outbound press to subscription-fatigue news beats.</p>
+    </div>
+    <div class="move">
+      <span class="tag">WO &middot; Catch-Up</span>
+      <h4>Pre-seed testimonials before the app ships</h4>
+      <p>Begin testimonial collection with the existing Home Assistant beta cohort now. The "saved my life" flywheel takes 90 days to start producing visible content and must be running when paid traffic hits the eldercare landing pages.</p>
+    </div>
+    <div class="move">
+      <span class="tag">ST &middot; Defensive</span>
+      <h4>Lock in "no subscription, ever" publicly</h4>
+      <p>Once a brand publicly commits, the moat is hard to replicate without alienating a paying customer base. Eight Sleep already cannot make this promise. Withings, SwitchBot, and Aqara would face PR-difficult reversals.</p>
+    </div>
+    <div class="move">
+      <span class="tag">WT &middot; Mitigation</span>
+      <h4>Treat app reliability as a launch-blocker</h4>
+      <p>The single largest threat is shipping an alert system that fails at 3am on iOS Do Not Disturb. That is the gap Aqara, Withings, and SwitchBot communities all complain about, and the bar Babysense has set in adjacent categories.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4 — FORCES
+============================================================ -->
+<section class="divider" id="forces">
+  <div class="number">04</div>
+  <h2 class="title">Competitive Forces</h2>
+  <p class="lead">Where rivalry is real, where it is overstated, and where ASC's lane is sparsely populated.</p>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Section 04 / Competitive Forces Analysis</div>
+  <h1 class="section">Five forces shaping the next 24 months.</h1>
+
+  <div class="forces">
+    <div class="force">
+      <div class="label">
+        <div class="name">Threat of New Entrants</div>
+        <span class="level">Moderate</span>
+      </div>
+      <div class="body"><p>Hardware-side entry is non-trivial. Pressure-sensing fabric is technically defensible. ESP32 with an open API takes 12 to 18 months to build to ASC's level. The realistic threats are existing consumer-app brands extending their lineup. Wyze, Eufy, and Apple Home are the most plausible. Mitigation is brand and trust accumulation: by the time a Wyze ships a privacy-first pressure mat, ASC should already own the search terms and the testimonial layer.</p></div>
+    </div>
+
+    <div class="force">
+      <div class="label">
+        <div class="name">Bargaining Power of Buyers</div>
+        <span class="level">Low &rarr; Rising</span>
+      </div>
+      <div class="body"><p>The adult-child caregiver has limited credible substitutes today. Walabot (radar, monthly fee, install issues), Smart Caregiver (legacy pad and pager, no smartphone alert), Wyze cameras (alert noise, dignity issue), and Aqara FP2 (ghosting, Chinese) all fail at least one filter the buyer applies. As the consumer-app market matures, buyer power will rise. ASC has roughly 12 to 24 months to build brand preference before substitutes match the privacy-first positioning.</p></div>
+    </div>
+
+    <div class="force">
+      <div class="label">
+        <div class="name">Bargaining Power of Suppliers</div>
+        <span class="level">Moderate</span>
+      </div>
+      <div class="body"><p>ESP32, sensor textile manufacturing, and US assembly are sourceable but represent margin pressure points. The "made in Woodinville" advantage depends on protecting that margin without raising prices into the Eight Sleep or Emfit tier. Strategic supplier diversification (especially around the ESP32 module) is a year-two priority and should be tracked even though it is not urgent for the next 90 days.</p></div>
+    </div>
+
+    <div class="force">
+      <div class="label">
+        <div class="name">Threat of Substitutes</div>
+        <span class="level">Moderate, Varies</span>
+      </div>
+      <div class="body"><p>For the Home Assistant tinkerer segment, mmWave radar is a direct substitute (Aqara FP2/FP400, Apollo MSR-2). For the caregiver segment, the substitutes are weaker (industrial pad-and-pager systems with no phone alert, Walabot radar with subscription, in-room cameras). The strongest substitutes sit in the segment ASC is least focused on. The weakest substitutes sit in the segment ASC is best positioned for. That is not coincidence. It is the strategic logic of the recommended Path B.</p></div>
+    </div>
+
+    <div class="force">
+      <div class="label">
+        <div class="name">Industry Rivalry</div>
+        <span class="level">Low in ASC's Lane</span>
+      </div>
+      <div class="body"><p>The sleep tracker category is brutally competitive (Whoop, Oura, Eight Sleep, Withings). The room-presence smart-home category is also crowded (Aqara, SwitchBot, Apollo). The intersection of "privacy-first, made-in-USA, app-first, no-subscription, pressure-sensing for caregiver and home automation" is sparsely populated. ASC's competitive lane is defensible if claimed publicly and quickly.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5 — RECOMMENDATIONS
+============================================================ -->
+<section class="divider" id="recommendations">
+  <div class="number">05</div>
+  <h2 class="title">Strategic Recommendations</h2>
+  <p class="lead">A four-point positioning frame and three priority initiatives for the next 90 days.</p>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Section 05 / Strategic Recommendations</div>
+  <h1 class="section">Lock in the position. Ship the priorities.</h1>
+
+  <h2 class="subsection">5.1 The four-point positioning frame</h2>
+  <p>ASC should publicly and operationally commit to a four-point frame that no current competitor can credibly copy without undermining their existing business model. This frame should appear on the homepage, every PDP, the app store screenshots, the order confirmations, and the box itself.</p>
+
+  <div class="trust-bar">
+    <div class="trust-pill"><div class="num">1</div><div class="label">Presence, not surveillance.<br>No cameras. No microphones. No wearables.</div></div>
+    <div class="trust-pill"><div class="num">2</div><div class="label">Made in Woodinville.<br>Your data stays in your home.</div></div>
+    <div class="trust-pill"><div class="num">3</div><div class="label">No subscription. Ever.<br>Hardware you own. App included.</div></div>
+    <div class="trust-pill"><div class="num">4</div><div class="label">Real human support.<br>Same business day. 30-day buy-back.</div></div>
+  </div>
+
+  <h2 class="subsection">5.2 Three priority initiatives for the next 90 days</h2>
+  <div class="priorities">
+    <div class="priority">
+      <div class="priority-head">
+        <div class="priority-num">1</div>
+        <h3>Engineer the consumer app to caregiver-grade reliability.</h3>
+      </div>
+      <div class="priority-body">
+        <p>The single highest-leverage 90-day investment is the consumer app's alert path. The eldercare buyer's repeat complaint across forums is "the alert isn't loud enough to wake me." This is solvable with iOS Critical Alerts (requires Apple entitlement application), Android equivalent priority channels, escalating tones, vibration patterns, and a custom "wake-me-up" mode. Without this, the entire eldercare positioning fails on first contact with a real customer.</p>
+        <p>The pairing UX must benchmark against Apple HomeKit (under 90 seconds from box-open to first alert). Bed-compatibility logic must be plain-English. Anything more than three steps in setup loses the tired caregiver at 11pm.</p>
+        <div class="priority-metric">
+          <strong>Success Metric</strong>
+          95%+ of beta users report being woken up successfully on a 3am test alert, and 90%+ complete pairing without contacting support.
+        </div>
+      </div>
+    </div>
+
+    <div class="priority">
+      <div class="priority-head">
+        <div class="priority-num">2</div>
+        <h3>Rewrite the eldercare landing page around dignity, not features.</h3>
+      </div>
+      <div class="priority-body">
+        <p>The /slumbertek-elder-care-monitoring page is the highest-conversion-leverage asset in the marketing system because it intercepts the highest-intent search traffic. Today the page is feature-led. The customer voice data shows the buyer is dignity-led.</p>
+        <div class="pullquote">"She raised you. She doesn't have to live on camera now. SlumberTek goes under her mattress. The moment she gets out of bed, your phone wakes you up, even at 3am. No camera in her room. No microphone. No subscription. Made in Woodinville."</div>
+        <p>Follow with one promise about the alert moment (with a real testimonial when available), the four-point trust frame, a Bedside Safety Bundle CTA, and a 30-day buy-back guarantee in 18-point type. SEO targets: "bed alarm for elderly with phone alert," "fall mat for elderly," "Walabot Home alternative," "no camera elderly monitoring."</p>
+        <div class="priority-metric">
+          <strong>Success Metric</strong>
+          Page-level conversion above 4% on cold traffic and above 8% on retargeted traffic within 60 days of relaunch.
+        </div>
+      </div>
+    </div>
+
+    <div class="priority">
+      <div class="priority-head">
+        <div class="priority-num">3</div>
+        <h3>Ship "The Bedside Safety Bundle" as a single SKU.</h3>
+      </div>
+      <div class="priority-body">
+        <p>The Voice of Customer data is unambiguous: caregivers want a kit, not a project. The 90-day deliverable is one box at one price, containing SlumberTek, TrampleTek Blue, the consumer app preset for caregiver alerts, a one-page setup card, and a no-slip strip. Recommended price: $189 to $229. The bundle should have a dedicated PDP, a dedicated Shopify URL slug (/products/bedside-safety-bundle), a dedicated paid-search campaign, and tie-in from the eldercare landing page.</p>
+        <div class="priority-metric">
+          <strong>Success Metric</strong>
+          25% of total monthly DTC revenue routing through the bundle SKU within 60 days of launch, with a return rate below 8%.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6 — WATCH LIST
+============================================================ -->
+<section class="page" id="watchlist">
+  <div class="eyebrow">Section 05 (continued) / 30-Day Watch List</div>
+  <h1 class="section">External triggers that should drive a tactical response.</h1>
+  <p class="lead-p">Five external triggers should drive a tactical response within one week if observed. The watch list is the bridge between the 90-day strategy and the day-to-day marketing motion.</p>
+
+  <table class="brief">
+    <thead>
+      <tr><th>Trigger</th><th>Response</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Aqara FP400 reviews credibly claim ghosting solved</td><td>Refresh the ASC vs Aqara comparison page within one week. Shift positioning toward setup ease and made-in-USA.</td></tr>
+      <tr><td>Eight Sleep class action gets mainstream press coverage (NYT, WSJ, Bloomberg)</td><td>Run a 48-hour paid social burst around "no subscription, ever" against subscription-fatigue keywords.</td></tr>
+      <tr><td>Withings re-enters the US with Sleep Analyzer</td><td>Update the Withings-alternative comparison page. Reinforce dignity and presence positioning vs clinical-sleep positioning.</td></tr>
+      <tr><td>SwitchBot Presence Sensor crosses 1,000 Amazon US reviews</td><td>Deploy a "ASC vs SwitchBot" comparison page leading with warranty and support, not price.</td></tr>
+      <tr><td>Walabot Home goes out of stock at Walmart for 30+ days</td><td>Push the Bedside Safety Bundle into eldercare paid search and PR, positioned as a Walabot replacement.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ============================================================
+     SECTION 7 — RISKS
+============================================================ -->
+<section class="divider" id="risks">
+  <div class="number">06</div>
+  <h2 class="title">Risk Considerations</h2>
+  <p class="lead">Three board-level risks over the next 90 days, with mitigations.</p>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Section 06 / Risk Considerations</div>
+  <h1 class="section">What could break this plan, and how to keep it intact.</h1>
+
+  <div class="risks">
+    <div class="risk">
+      <h4>1. Execution risk on the consumer app</h4>
+      <p>The strategic logic of this brief depends on ASC shipping an app with critical-alert reliability that matches the Babysense bar. If the app launches with iOS DND issues, missed pairing flows, or unreliable notifications, the eldercare landing page and bundle SKU will absorb negative reviews that take 12 months to overcome.</p>
+      <span class="mit">Mitigation &middot; Protect engineering scope ruthlessly. Treat Critical Alerts entitlement as a launch-blocker. Run a pre-launch closed beta with five caregiver households for 14 nights minimum.</span>
+    </div>
+    <div class="risk">
+      <h4>2. Brand confusion risk between segments</h4>
+      <p>Marketing both to the Home Assistant tinkerer and to the caregiver risks diluting the brand voice. The caregiver buyer will not engage with technical specs, and the tinkerer will not engage with dignity copy.</p>
+      <span class="mit">Mitigation &middot; Separate page paths and campaigns. Homepage acts as a two-paths router (consumer eldercare buyer, OEM and developer buyer), per the existing v3 web copy structure.</span>
+    </div>
+    <div class="risk">
+      <h4>3. Competitor-response risk</h4>
+      <p>The "no subscription, no camera, no microphone, made in USA" positioning is strong precisely because no current competitor can credibly copy it without alienating their installed base. If a well-funded entrant (Wyze, Eufy, Apple Home) launches a privacy-first pressure mat in 2027, ASC's first-mover trust will be the moat.</p>
+      <span class="mit">Mitigation &middot; Convert positioning into operational reality. Publish the privacy commitment as a public document, build customer testimonials around it, and capture the SEO position so even a copycat finds ASC owning the category language.</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CLOSING
+============================================================ -->
+<section class="closing" id="conclusion">
+  <div class="wave-bg" aria-hidden="true">
+    <svg viewBox="0 0 1080 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="cg1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#5A2D8A" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#AC4FC6" stop-opacity="0.15"/>
+        </linearGradient>
+      </defs>
+      <path d="M-50,440 C 220,360 480,560 780,440 C 980,360 1080,440 1180,420 L 1180,600 L -50,600 Z" fill="url(#cg1)"/>
+      <path d="M-50,520 C 240,460 520,620 820,500 C 1000,440 1100,500 1180,490 L 1180,600 L -50,600 Z" fill="#5A2D8A" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <div class="cover-eyebrow">Section 07 / Conclusion</div>
+  <h2>The window is open today. It will narrow.</h2>
+  <p>ASC has an unusually clean strategic opening. The market is demanding privacy-first, US-made, no-subscription, deterministic presence sensing, and the current category leaders cannot credibly deliver any one of those four credentials, let alone all four together. The question is operational, not strategic: can ASC ship the consumer app, the dignity-led eldercare landing page, and the Bedside Safety Bundle in the next 90 days fast enough to capture the buyer migration that is already in motion?</p>
+  <p>The answer should be yes, and the cost of being slow is high. Aqara is iterating on the FP400. Eight Sleep's class action will fade from the news. Walabot's B2B pivot will leave a vacuum that Wyze or Eufy will eventually fill.</p>
+  <p>Commit to Path B (caregiver-led) as the primary motion for the next 90 days. Lock in the four-point positioning frame publicly and operationally. Treat consumer-app reliability as a launch-blocker quality bar. Path A (smart-home enthusiast) remains protected as a secondary channel through the Home Assistant ecosystem. OEM and integrator partnerships build in the background as a Q3 priority once the DTC bundle is performing.</p>
+
+  <div class="footer-grid">
+    <div>
+      <div class="lbl">Source Base</div>
+      <div class="val">2026-05-03 ASC Competitive Intelligence Findings &middot; 2026-05-03 ASC Voice of Customer Findings</div>
+    </div>
+    <div>
+      <div class="lbl">Prepared By</div>
+      <div class="val">Truax Marketing Solutions &middot; digital@truaxmarketing.com</div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ============================================================
+     BACK TO TOP
+============================================================ -->
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<script>
+  // ---------- Active section highlighting ----------
+  const sectionIds = ['cover','summary','market','swot','forces','recommendations','watchlist','risks','conclusion'];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  const links = document.querySelectorAll('.topnav-link');
+  const linkBySection = {};
+  links.forEach(l => { linkBySection[l.dataset.section] = l; });
+
+  // Use IntersectionObserver to detect which section is most visible
+  const visibility = {};
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { visibility[e.target.id] = e.intersectionRatio; });
+    let topId = null, topRatio = 0;
+    Object.keys(visibility).forEach(id => {
+      if (visibility[id] > topRatio) { topRatio = visibility[id]; topId = id; }
+    });
+    if (topId && topRatio > 0) {
+      links.forEach(l => l.classList.remove('active'));
+      const link = linkBySection[topId];
+      if (link) {
+        link.classList.add('active');
+        // Scroll the active link into view in the horizontal nav
+        link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  }, { rootMargin: '-72px 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ---------- Reading progress bar ----------
+  const progress = document.getElementById('progress');
+  const updateProgress = () => {
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docH > 0 ? Math.min(100, (window.scrollY / docH) * 100) : 0;
+    progress.style.width = pct + '%';
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // ---------- Back to top ----------
+  const backTop = document.getElementById('backTop');
+  const toggleBackTop = () => {
+    if (window.scrollY > 600) backTop.classList.add('show');
+    else backTop.classList.remove('show');
+  };
+  window.addEventListener('scroll', toggleBackTop, { passive: true });
+  backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+
+</body>
+</html>
